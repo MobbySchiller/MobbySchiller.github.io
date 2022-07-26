@@ -1,4 +1,4 @@
-import { DEFAULT_POSITION_Y, game } from './Game.js';
+import { CONTAINER_WIDTH, DEFAULT_POSITION_Y, game } from './Game.js';
 
 export class Obstacle {
     constructor(container) {
@@ -7,7 +7,9 @@ export class Obstacle {
         this.width = 50;
         this.height = 32;
         this.img = "url('./assets/obstacle.png')";
-        this.right = 100;
+        this.positionX = CONTAINER_WIDTH + this.width;
+        // this.positionX = 200;
+        this.positionY = DEFAULT_POSITION_Y;
         this.interval = null;
         this.init();
     }
@@ -23,19 +25,19 @@ export class Obstacle {
         this.obstacle.style.height = `${this.height}px`;
         this.obstacle.style.backgroundImage = this.img;
         this.obstacle.style.position = 'absolute';
-        this.obstacle.style.bottom = `${DEFAULT_POSITION_Y}%`;
+        this.obstacle.style.bottom = `${this.positionY}%`;
         this.setPosition();
         this.container.appendChild(this.obstacle);
     }
 
     setPosition() {
-        this.obstacle.style.right = `${this.right}px`
+        this.obstacle.style.left = `${this.positionX}px`
     }
 
     obstacleMovement() {
         this.interval = setInterval(() => {
-            if (this.right < 800) {
-                this.right += 2;
+            if (this.positionX > 0) {
+                this.positionX -= 2;
                 this.setPosition();
             } else {
                 this.stopMovement();

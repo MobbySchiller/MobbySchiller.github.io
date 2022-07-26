@@ -44,7 +44,6 @@ export class Character {
                     this.horizontalMove();
                     break;
                 case 32:
-                    console.log('w górę');
                     if (!this.allowToJump) {
                         this.allowToJump = true;
                         this.goUp = true;
@@ -88,16 +87,24 @@ export class Character {
     }
 
     jumpUp() {
-        this.stopAnimation();
+        this.checkAnimation();
         this.jumpInterval = setInterval(() => this.verticalMove(), 14);
     }
 
-    stopAnimation() {
+    checkAnimation() {
         if (this.allowToJump) {
-            this.element.classList.remove('character--animation');
+            this.stopAnimation();
         } else {
-            this.element.classList.add('character--animation');
+            this.resumeAnimation();
         }
+    }
+
+    stopAnimation() {
+        this.element.classList.remove('character--animation');
+    }
+
+    resumeAnimation() {
+        this.element.classList.add('character--animation');
     }
 
     verticalMove() {
@@ -112,7 +119,7 @@ export class Character {
                 this.positionY -= 1;
             } else {
                 this.allowToJump = false;
-                this.stopAnimation();
+                this.checkAnimation();
                 clearInterval(this.jumpInterval);
                 this.jump = null;
             }
