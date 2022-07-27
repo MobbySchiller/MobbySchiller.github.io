@@ -9,14 +9,13 @@
 </head>
 <body>
     <h1 class="instruction">Use 'space' to jump</h1>
-    <div class="game">
+    <div class="game" id="game-container">
         <div class="background">
             <div class="background__sky"></div>
             <div class="background__grass"></div>
             <div class="background__dirt"></div>
         </div>
-        <div class="character"></div>
-        <div class="obstacle"></div>
+        <div class="character character--animation" id="character"></div>
     </div>
     <script type="module" src="./js/Game.js"></script>
 </body>
