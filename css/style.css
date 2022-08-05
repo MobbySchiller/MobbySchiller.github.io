@@ -64,6 +64,7 @@ body {
   height: 65px;
   background-image: url("../assets/run.png");
   background-position: -32px;
+  z-index: 999;
 }
 .game .character--animation {
   -webkit-animation: run 0.8s steps(8) infinite;
