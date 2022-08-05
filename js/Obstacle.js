@@ -8,7 +8,6 @@ export class Obstacle {
         this.height = 32;
         this.img = "url('./assets/obstacle.png')";
         this.positionX = CONTAINER_WIDTH + this.width;
-        // this.positionX = 200;
         this.positionY = DEFAULT_POSITION_Y;
         this.interval = null;
         this.init();

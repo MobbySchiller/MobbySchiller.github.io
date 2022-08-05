@@ -37,11 +37,13 @@ export class Character {
                     this.leftArrow = true;
                     this.rotateCharacter(e.keyCode)
                     this.horizontalMove();
+                    this.resumeAnimation();
                     break;
                 case 39:
                     this.rightArrow = true;
                     this.rotateCharacter(e.keyCode)
                     this.horizontalMove();
+                    this.resumeAnimation();
                     break;
                 case 32:
                     if (!this.allowToJump) {
@@ -56,9 +58,11 @@ export class Character {
             switch (e.keyCode) {
                 case 37:
                     this.leftArrow = false;
+                    this.stopAnimation();
                     break;
                 case 39:
                     this.rightArrow = false;
+                    this.stopAnimation();
                     break;
             }
         })
