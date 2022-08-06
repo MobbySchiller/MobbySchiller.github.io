@@ -31,41 +31,46 @@ export class Character {
     }
 
     eventListeners() {
-        window.addEventListener('keydown', (e) => {
-            switch (e.keyCode) {
-                case 37:
-                    this.leftArrow = true;
-                    this.rotateCharacter(e.keyCode)
-                    this.horizontalMove();
-                    this.resumeAnimation();
-                    break;
-                case 39:
-                    this.rightArrow = true;
-                    this.rotateCharacter(e.keyCode)
-                    this.horizontalMove();
-                    this.resumeAnimation();
-                    break;
-                case 32:
-                    if (!this.allowToJump) {
-                        this.allowToJump = true;
-                        this.goUp = true;
-                        this.jumpUp();
-                    }
-                    break;
-            }
-        })
-        window.addEventListener('keyup', (e) => {
-            switch (e.keyCode) {
-                case 37:
-                    this.leftArrow = false;
-                    this.stopAnimation();
-                    break;
-                case 39:
-                    this.rightArrow = false;
-                    this.stopAnimation();
-                    break;
-            }
-        })
+        window.addEventListener('keydown', this.keydownAction);
+        window.addEventListener('keyup', this.keyupAction);
+    }
+
+    stopEventListeners() {
+        window.removeEventListener('keydown', this.keydownAction);
+        window.removeEventListener('keyup', this.keyupAction);
+    }
+
+    keydownAction = (e) => {
+        switch (e.keyCode) {
+            case 37:
+                this.leftArrow = true;
+                this.rotateCharacter(e.keyCode)
+                this.horizontalMove();
+                break;
+            case 39:
+                this.rightArrow = true;
+                this.rotateCharacter(e.keyCode)
+                this.horizontalMove();
+                break;
+            case 32:
+                if (!this.allowToJump) {
+                    this.allowToJump = true;
+                    this.goUp = true;
+                    this.jumpUp();
+                }
+                break;
+        }
+    }
+
+    keyupAction = (e) => {
+        switch (e.keyCode) {
+            case 37:
+                this.leftArrow = false;
+                break;
+            case 39:
+                this.rightArrow = false;
+                break;
+        }
     }
 
     gameLoop = () => {

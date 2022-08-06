@@ -1,11 +1,14 @@
 import { CONTAINER_WIDTH, CONTAINER_HEIGHT, DEFAULT_POSITION_Y, game } from './Game.js';
 
+const CLOUD_WIDTH = 70;
+const CLOUD_HEIGHT = 35;
+
 export class Cloud {
     constructor(container) {
         this.container = container;
         this.cloud = null;
-        this.width = 70;
-        this.height = 35;
+        this.width = CLOUD_WIDTH;
+        this.height = CLOUD_HEIGHT;
         this.img = "url('./assets/cloud.png')";
         this.positionX = CONTAINER_WIDTH + this.width;
         this.positionY = DEFAULT_POSITION_Y;
@@ -25,7 +28,7 @@ export class Cloud {
         console.log(DEFAULT_POSITION_Y);
         console.log(CONTAINER_HEIGHT);
         while (verticalPosition < DEFAULT_POSITION_Y + 5) {
-            verticalPosition = Math.floor(Math.random() * 100);
+            verticalPosition = Math.floor(Math.random() * (100 - CLOUD_HEIGHT));
         }
         console.log(verticalPosition);
         this.positionY = verticalPosition;
@@ -36,6 +39,7 @@ export class Cloud {
         this.cloud.style.width = `${this.width}px`;
         this.cloud.style.height = `${this.height}px`;
         this.cloud.style.backgroundImage = this.img;
+        this.cloud.style.backgroundSize = 'cover';
         this.cloud.style.position = 'absolute';
         this.cloud.style.bottom = `${this.positionY}%`;
         this.setPosition();

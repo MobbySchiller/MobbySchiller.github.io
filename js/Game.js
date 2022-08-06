@@ -56,16 +56,20 @@ class Game {
     }
 
     checkCollision() {
-
         this.obstacles.forEach(obstacle => {
             if ((this.character.positionX + CHARACTER_WIDTH - 6 >= obstacle.positionX) && (this.character.positionX + 6 <= obstacle.positionX + obstacle.width) && (this.character.positionY + 2 <= obstacle.positionY + obstacle.height * 100 / CONTAINER_HEIGHT)) {
-                clearInterval(obstacle.interval);
                 clearInterval(this.obstacleGenerator);
+                clearInterval(obstacle.interval);
+                this.obstacleGenerator = null;
+
+                // clearInterval(this.cloudsGenerator);
+                // this.clouds.forEach(cloud => clearInterval(cloud.interval));
+                // this.cloudsGenerator = null;
+
                 clearInterval(this.character.jumpInterval);
                 this.character.stopEventListeners();
-                this.character.stopAnimation();
-                this.obstacleGenerator = null;
-                this.cloudsGenerator = null;
+                this.character.leftArrow = false;
+                this.character.rightArrow = false;
                 this.character.stopAnimation();
             }
         })
