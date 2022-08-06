@@ -58,11 +58,12 @@ class Game {
     checkCollision() {
 
         this.obstacles.forEach(obstacle => {
-            if ((this.character.positionX + CHARACTER_WIDTH >= obstacle.positionX) && (this.character.positionX <= obstacle.positionX + obstacle.width) && (this.character.positionY <= obstacle.positionY + obstacle.height * 100 / CONTAINER_HEIGHT)) {
+            if ((this.character.positionX + CHARACTER_WIDTH - 6 >= obstacle.positionX) && (this.character.positionX + 6 <= obstacle.positionX + obstacle.width) && (this.character.positionY + 2 <= obstacle.positionY + obstacle.height * 100 / CONTAINER_HEIGHT)) {
                 clearInterval(obstacle.interval);
                 clearInterval(this.obstacleGenerator);
                 clearInterval(this.character.jumpInterval);
                 this.character.stopEventListeners();
+                this.character.stopAnimation();
                 this.obstacleGenerator = null;
                 this.cloudsGenerator = null;
                 this.character.stopAnimation();
