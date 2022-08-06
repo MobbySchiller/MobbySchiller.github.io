@@ -12,7 +12,10 @@ class Game {
         this.htmlElements = {
             character: document.getElementById('character'),
             container: document.getElementById('game-container'),
+            score: document.getElementById('score'),
         }
+        this.score = 0;
+        this.scoreInterval = null;
         this.obstacles = [];
         this.obstacleGenerator = null;
         this.clouds = [];
@@ -27,6 +30,7 @@ class Game {
         this.character.init();
         this.generateObstacle();
         this.generateClouds();
+        this.scoreCounter();
         this.collisionInterval();
     }
 
@@ -51,6 +55,17 @@ class Game {
         this.clouds.shift();
     }
 
+    scoreDisplay() {
+        this.htmlElements.score.textContent = this.score;
+    }
+
+    scoreCounter() {
+        this.scoreInterval = setInterval(() => {
+            this.score++;
+            this.scoreDisplay();
+        }, 1500)
+    }
+
     collisionInterval() {
         this.colisionInt = setInterval(() => this.checkCollision(), 1);
     }
@@ -62,15 +77,13 @@ class Game {
                 clearInterval(obstacle.interval);
                 this.obstacleGenerator = null;
 
-                // clearInterval(this.cloudsGenerator);
-                // this.clouds.forEach(cloud => clearInterval(cloud.interval));
-                // this.cloudsGenerator = null;
-
                 clearInterval(this.character.jumpInterval);
                 this.character.stopEventListeners();
                 this.character.leftArrow = false;
                 this.character.rightArrow = false;
                 this.character.stopAnimation();
+
+                clearInterval(this.scoreInterval);
             }
         })
     }

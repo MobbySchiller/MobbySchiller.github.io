@@ -5,17 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1 class="instruction">Use 'space' to jump</h1>
+    <h1 class="instruction">Use 'space' to jump and 'arrows' to move</h1>
     <div class="game" id="game-container">
+        <p class="score-board">score:<span class="score-board__score" id="score">0</span></p>
         <div class="background">
             <div class="background__sky"></div>
             <div class="background__grass"></div>
             <div class="background__dirt"></div>
         </div>
-        <div class="character" id="character"></div>
+        <div class="character character--animation" id="character"></div>
     </div>
     <script type="module" src="./js/Game.js"></script>
 </body>
