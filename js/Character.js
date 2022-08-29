@@ -17,17 +17,17 @@ export class Character {
         this.jumpInterval = null;
         this.goUp = true;
         this.allowToJump = false;
-    }
-
-    init() {
-        this.setPosition();
-        this.eventListeners();
         this.gameLoop();
     }
 
-    setPosition() {
-        this.element.style.left = `${this.positionX}px`;
-        this.element.style.bottom = `${this.positionY}%`;
+    init() {
+        this.setPosition(DEFAULT_POSITION_X, DEFAULT_POSITION_Y);
+        this.eventListeners();
+    }
+
+    setPosition(x, y) {
+        this.element.style.left = `${x}px`;
+        this.element.style.bottom = `${y}%`;
     }
 
     eventListeners() {
@@ -92,7 +92,7 @@ export class Character {
         } else if (this.leftArrow && this.positionX > 0) {
             this.positionX -= this.modifier;
         }
-        this.setPosition();
+        this.setPosition(this.positionX, this.positionY);
     }
 
     jumpUp() {
@@ -133,6 +133,6 @@ export class Character {
                 this.jump = null;
             }
         }
-        this.setPosition();
+        this.setPosition(this.positionX, this.positionY);
     }
 }
