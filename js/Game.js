@@ -12,7 +12,13 @@ class Game {
         this.htmlElements = {
             character: document.getElementById('character'),
             container: document.getElementById('game-container'),
+            obstaclesContainer: document.getElementById('obstacles-container'),
+            cloudsContainer: document.getElementById('clouds-container'),
             score: document.getElementById('score'),
+            lossScreen: document.getElementById('loss'),
+            lossScreenPoints: document.getElementById('loss-points'),
+            modal: document.getElementById('modal'),
+            restartBtn: document.getElementById('restart-button'),
         }
         this.score = 0;
         this.scoreInterval = null;
@@ -24,6 +30,7 @@ class Game {
         this.colisionInt = null;
 
         this.character = new Character(this.htmlElements.character, this.htmlElements.container);
+        this.htmlElements.restartBtn.addEventListener('click', this.restartGame);
     }
 
     init() {
@@ -36,13 +43,13 @@ class Game {
 
     generateObstacle() {
         this.obstacleGenerator = setInterval(() => {
-            const obstacle = new Obstacle(this.htmlElements.container);
+            const obstacle = new Obstacle(this.htmlElements.obstaclesContainer);
             this.obstacles.push(obstacle);
         }, this.generateTime * 3 / 2)
     }
     generateClouds() {
         this.cloudsGenerator = setInterval(() => {
-            const cloud = new Cloud(this.htmlElements.container);
+            const cloud = new Cloud(this.htmlElements.cloudsContainer);
             this.clouds.push(cloud);
         }, this.generateTime)
     }
@@ -73,19 +80,65 @@ class Game {
     checkCollision() {
         this.obstacles.forEach(obstacle => {
             if ((this.character.positionX + CHARACTER_WIDTH - 6 >= obstacle.positionX) && (this.character.positionX + 6 <= obstacle.positionX + obstacle.width) && (this.character.positionY + 2 <= obstacle.positionY + obstacle.height * 100 / CONTAINER_HEIGHT)) {
-                clearInterval(this.obstacleGenerator);
-                clearInterval(obstacle.interval);
-                this.obstacleGenerator = null;
-
-                clearInterval(this.character.jumpInterval);
-                this.character.stopEventListeners();
-                this.character.leftArrow = false;
-                this.character.rightArrow = false;
-                this.character.stopAnimation();
-
-                clearInterval(this.scoreInterval);
+                this.stopObstacle(obstacle);
+                this.stopCharacter();
+                this.stopScoring();
+                this.showCollision();
+                this.stopCheckingCollision();
+                setTimeout(this.showResult, 3000);
             }
         })
+    }
+
+    stopObstacle(object) {
+        clearInterval(this.obstacleGenerator);
+        clearInterval(object.interval);
+        setTimeout(() => {
+            object.removeObstacle();
+        }, 3000);
+        this.obstacleGenerator = null;
+    }
+
+    stopCharacter() {
+        clearInterval(this.character.jumpInterval);
+        this.character.stopEventListeners();
+        this.character.leftArrow = false;
+        this.character.rightArrow = false;
+        this.character.stopAnimation();
+    }
+    stopScoring() {
+        clearInterval(this.scoreInterval);
+    }
+
+    stopCheckingCollision() {
+        clearInterval(this.colisionInt);
+    }
+
+    showCollision() {
+        this.htmlElements.lossScreen.classList.add('loss-screen');
+    }
+
+    showResult = () => {
+        this.htmlElements.modal.classList.add('modal-result--visible');
+        this.htmlElements.lossScreenPoints.textContent = this.score;
+        this.htmlElements.restartBtn.disabled = false;
+    }
+
+    restartGame = () => {
+        this.htmlElements.restartBtn.disabled = true;
+        this.score = 0;
+        this.htmlElements.lossScreen.classList.remove('loss-screen');
+        this.htmlElements.modal.classList.remove('modal-result--visible');
+        this.obstacles = [];
+        this.clouds = [];
+        this.scoreCounter();
+        this.scoreDisplay();
+        this.character.resumeAnimation();
+        this.character = new Character(this.htmlElements.character, this.htmlElements.container);
+        this.character.init();
+        this.generateObstacle();
+        this.collisionInterval();
+        console.log(this.obstacleGenerator)
     }
 }
 
