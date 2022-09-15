@@ -46,8 +46,12 @@ export class Obstacle {
 
     stopMovement() {
         game.removeObstacle();
-        this.container.removeChild(this.obstacle);
+        this.removeObstacle();
         clearInterval(this.interval);
+    }
+
+    removeObstacle() {
+        this.container.removeChild(this.obstacle);
     }
 
 }
