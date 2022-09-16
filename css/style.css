@@ -75,7 +75,7 @@ body {
   height: 65px;
   background-image: url("../assets/run.png");
   background-position: -32px;
-  z-index: 999;
+  z-index: 998;
 }
 .game .character--animation {
   -webkit-animation: run 0.8s steps(8) infinite;
@@ -84,6 +84,75 @@ body {
 .game .character--go-back {
   -webkit-transform: scaleX(-1);
           transform: scaleX(-1);
+}
+.game .clouds, .game .obstacles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.game .loss-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  opacity: 0.4;
+  z-index: 999;
+}
+.game .modal-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 60%;
+  height: 60%;
+  padding: 30px;
+  border: 2px solid black;
+  background-color: white;
+  z-index: 1000;
+  visibility: hidden;
+}
+.game .modal-result--visible {
+  visibility: visible;
+}
+.game .modal-result__title {
+  font-size: 30px;
+  font-weight: 700;
+}
+.game .modal-result__score {
+  font-size: 24px;
+}
+.game .modal-result__button {
+  margin-top: 20px;
+  padding: 6px 12px;
+  border: 2px solid black;
+  background-color: yellow;
+  font-size: 20px;
+  font-family: "VT323", monospace;
+  font-weight: 700;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+.game .modal-result__button:hover {
+  background-color: #c2c200;
 }
 
 @-webkit-keyframes ground {
