@@ -20,17 +20,13 @@ export class Cloud {
         this.positionYGenerator();
         this.createCloud();
         this.cloudMovement();
-        console.log(this.positionY);
     }
 
     positionYGenerator() {
         let verticalPosition = 0;
-        console.log(DEFAULT_POSITION_Y);
-        console.log(CONTAINER_HEIGHT);
-        while (verticalPosition < DEFAULT_POSITION_Y + 5) {
-            verticalPosition = Math.floor(Math.random() * (100 - CLOUD_HEIGHT));
+        while (verticalPosition < DEFAULT_POSITION_Y + 20) {
+            verticalPosition = Math.floor(Math.random() * (100 - CLOUD_HEIGHT / 2));
         }
-        console.log(verticalPosition);
         this.positionY = verticalPosition;
     }
 
