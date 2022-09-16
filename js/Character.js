@@ -2,7 +2,7 @@ import { DEFAULT_POSITION_Y, CONTAINER_WIDTH } from './Game.js'
 
 export const CHARACTER_WIDTH = 42;
 const DEFAULT_POSITION_X = 100;
-const MAX_POSITION_Y = 54;
+const MAX_POSITION_Y = 50;
 
 export class Character {
 
