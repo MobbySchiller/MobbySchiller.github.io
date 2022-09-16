@@ -24,7 +24,6 @@ class Game {
 
         this.score = {
             result: 0,
-            record: 0,
             interval: null,
         }
 
@@ -144,10 +143,9 @@ class Game {
         this.character.stopAnimation();
     }
     stopScoring() {
-        if (this.score.result > this.score.record) {
+        if (this.score.result > parseInt(localStorage.getItem('record'))) {
             localStorage.clear();
             localStorage.setItem('record', this.score.result);
-            this.score.record = parseInt(localStorage.getItem('record'));
         }
         clearInterval(this.score.interval);
     }
@@ -164,7 +162,7 @@ class Game {
     showResult = () => {
         this.htmlElements.modal.classList.add('modal-result--visible');
         this.htmlElements.lossScreenPoints.textContent = this.score.result;
-        this.htmlElements.recordScreenPoints.textContent = this.score.record;
+        this.htmlElements.recordScreenPoints.textContent = localStorage.getItem('record');
         this.htmlElements.restartBtn.disabled = false;
     }
 
