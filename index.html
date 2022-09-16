@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1 class="instruction">Use 'space' to jump and 'arrows' to move</h1>
+    <h1 class="instruction">Use 'arrows' to move and 'space' to jump and </h1>
     <div class="game" id="game-container">
         <p class="score-board">score:<span class="score-board__score" id="score">0</span></p>
         <div class="background">
@@ -24,7 +24,9 @@
         <div class="obstacles" id="obstacles-container"></div>
         <div id="loss"></div>
         <div class="modal-result" id="modal">
-            <p class="modal-result__score">Your result is <span class="modal-result__score-points" id="loss-points">0</span> points</p>
+            <p class="modal-result__title">GAME OVER</p>
+            <p class="modal-result__score">Your result: <span class="modal-result__score-points" id="loss-score">0</span> points</p>
+            <p class="modal-result__score">Highest result: <span class="modal-result__score-points" id="record-score">0</span> points</p>
             <button class="modal-result__button" id="restart-button">Play again</button>
         </div>
     </div>
