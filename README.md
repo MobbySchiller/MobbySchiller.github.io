@@ -21,11 +21,10 @@ I would like to introduce you to the game written by myself. All you need to do 
  * A live demo can be found [here](https://mobbyschiller.github.io/)
 
 ## Screenshots
-![](./public/screenshots/screenshot-mobile.jpg)
-![](./public/screenshots/screenshot-desktop.jpg)
-
-
+![](./screenshots/game-screenshot.jpg)
+![](./screenshots/game-over-screenshot.jpg)
 
 ## Source
+Here you can find source of assets.
 https://www.gameart2d.com/
 https://craftpix.net/
