@@ -144,7 +144,8 @@ class Game {
     }
 
     stopScoring() {
-        if (this.score.result > parseInt(localStorage.getItem('record')) || Number.isNaN(parseInt(localStorage.getItem('record')))) {
+        if (this.score.result > parseInt(localStorage.getItem('record'))
+            || Number.isNaN(parseInt(localStorage.getItem('record')))) {
             localStorage.setItem('record', this.score.result);
         }
         clearInterval(this.score.interval);
