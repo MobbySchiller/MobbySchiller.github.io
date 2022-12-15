@@ -142,9 +142,9 @@ class Game {
         this.character.rightArrow = false;
         this.character.stopAnimation();
     }
+
     stopScoring() {
-        if (this.score.result > parseInt(localStorage.getItem('record'))) {
-            localStorage.clear();
+        if (this.score.result > parseInt(localStorage.getItem('record')) || Number.isNaN(parseInt(localStorage.getItem('record')))) {
             localStorage.setItem('record', this.score.result);
         }
         clearInterval(this.score.interval);
